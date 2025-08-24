@@ -13,8 +13,8 @@ describe ('OrangeHRM Login Feature', () => {
     })
 
     it('TC_002 - Login dengan username & password tidak valid', () => {
-        cy.get('input[name="username"]').type('User')
-        cy.get('input[name="password"]').type('user12')
+        cy.get('input[placeholder="Username"]').type('User')
+        cy.get('input[placeholder="Password"]').type('user12')
         cy.get('button[type="submit"]').click()
         cy.get('.oxd-alert-content').should('contain', 'Invalid credentials')
     })
@@ -54,6 +54,6 @@ describe ('OrangeHRM Login Feature', () => {
         cy.get('.orangehrm-login-forgot > .oxd-text').click()
         cy.get('input[placeholder="Username"]').type('Admin')
         cy.get('button[type="submit"]').click()
-        cy.get('.oxd-text--h6').should('contain', 'Reset Password link sent successfully')
+        cy.get('.oxd-text.oxd-text--h6.orangehrm-forgot-password-title').should('contain', 'Reset Password link sent successfully')
     })
 })
