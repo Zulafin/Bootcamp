@@ -5,10 +5,15 @@ describe ('OrangeHRM Login Feature', () => {
         cy.visit(url)
     })
 
-    it('TC01 - Login dengan username dan password valid', () => {
+    it('TC_001 - Login dengan username dan password valid', () => {
         cy.get('input[placeholder="Username"]').type('Admin')
         cy.get('input[placeholder="Password"]').type('admin123')
+
+        //intercept
+        cy.intercept('GET', 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary').as('actionSummary')
         cy.get('button[type="submit"]').click()
+        cy.wait('@actionSummary').its('response.statusCode').should('eq', 200)
+
         cy.url().should('include', '/dashboard')
     })
 
@@ -19,16 +24,16 @@ describe ('OrangeHRM Login Feature', () => {
         cy.get('.oxd-alert-content').should('contain', 'Invalid credentials')
     })
 
-    it('TC03 - Login gagal dengan password salah', () => {
-        cy.get('input[placeholder="Username"]').type('User')
-        cy.get('input[placeholder="Password"]').type('admin123')
+    it('TC_003 - Login gagal dengan password salah', () => {
+        cy.get('input[placeholder="Username"]').type('User') //username salah
+        cy.get('input[placeholder="Password"]').type('admin123') //password valid
         cy.get('button[type="submit"]').click();
         cy.get('.oxd-alert-content').should('contain', 'Invalid credentials')
     });
 
     it('TC_004 - Login dengan username valid dan password salah', () => {
-        cy.get('input[placeholder="Username"]').type('Admin')
-        cy.get('input[placeholder="Password"]').type('admin234')
+        cy.get('input[placeholder="Username"]').type('Admin') //username valid
+        cy.get('input[placeholder="Password"]').type('admin234') //password salah
         cy.get('button[type="submit"]').click()
         cy.get('.oxd-alert-content').should('contain', 'Invalid credentials')
     })
