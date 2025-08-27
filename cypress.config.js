@@ -1,0 +1,12 @@
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig ({
+    e2e: {
+        setupNodeEvents(on, config) {
+            //implement node vent listeners here
+        },
+        supportFile:"cypress/support/e2e.js",
+        defaultCommandTimeout: 30000, //dalam milisecond (30 detik)
+        baseUrl : "https://opensource-demo.orangehrmlive.com/"
+    },
+});
