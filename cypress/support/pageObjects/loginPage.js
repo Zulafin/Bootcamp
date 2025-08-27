@@ -12,8 +12,15 @@ class loginPage {
         cy.get('input[placeholder="Password"]').clear().type(password)
     }
 
+    interceptLogin(){
+         cy.intercept('GET', 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary').as('actionSummary')
+    }
+
     Login_btn() {
-        cy.get('button[type="submit"]').click()
+        cy.get('button[type="submit"]').should('be.visible').click()
+    }
+    verifyIntercept(){
+        cy.wait('@actionSummary').its('response.statusCode').should('eq', 200)
     }
 
     clickForgotPassword() {

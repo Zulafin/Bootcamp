@@ -11,10 +11,10 @@ describe ('OrangeHRM Login Feature', () => {
         loginPage.inputPassword(loginData.validPassword)
 
         //intercept
-        cy.intercept('GET', 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary').as('actionSummary')
+        loginPage.interceptLogin()
+        
         loginPage.Login_btn ()
-        cy.wait('@actionSummary').its('response.statusCode').should('eq', 200)
-
+        loginPage.verifyIntercept()
         loginPage.verifyLoginSuccess()
     })
 
