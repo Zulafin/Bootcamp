@@ -1,0 +1,18 @@
+{
+    "employee1": {
+        "employeeName": "manda",
+        "completeEmployeeName": "manda akhil user",
+        "jobTitle": "HR Manager",
+        "location": "Texas R&D"
+    },
+    "employee2": {
+        "employeeName": "peter",
+        "completeEmployeeName": "Peter Mac Anderson",
+        "jobTitle": "Chief Financial Officer",
+        "location": "New York Sales Office"
+    },
+    "employee3": {
+        "jobTitle": "Account Assistant",
+        "location": "HQ - CA, USA"
+    }
+}

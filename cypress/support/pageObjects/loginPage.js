@@ -5,11 +5,11 @@ class loginPage {
     }
 
     inputUsername(username) {
-        cy.get('input[placeholder="Username"]').clear().type(username)
+        cy.get('[name="username"]').clear().type(username)
     }
 
     inputPassword(password) {
-        cy.get('input[placeholder="Password"]').clear().type(password)
+        cy.get('[name="password"]').clear().type(password)
     }
 
     interceptLogin(){
@@ -41,8 +41,11 @@ class loginPage {
     }
 
     verifyResetPasswordSuccess() {
-        cy.get('.oxd-text.oxd-text--h6.orangehrm-forgot-password-title')
-          .should('contain', 'Reset Password link sent successfully')
+        cy.get('.oxd-text.oxd-text--h6.orangehrm-forgot-password-title').should('contain', 'Reset Password link sent successfully')
+    }
+
+    verifyResetPasswordError() {
+       cy.get('.oxd-input-group > .oxd-text').should('contain', 'Required')
     }
 }
 
